@@ -79,14 +79,14 @@ def trade_bonds(exchange):
             if(buy_best[0] < 1000):
                 price = buy_best[0][0]
                 size = buy_best[0][1]
-                add(exchange, random_id(), "BOND", "BUY", price, size)
+                return_val = add(exchange, random_id(), "BOND", "BUY", price, size)
 
             if(sell_best[0] < 1000):
                 price = sell_best[0][0]
                 #size = min(positions, sell_best[0][1])
                 size = sell_best[0][1]
-                add(exchange, random_id(), "BOND", "SELL", price, size)
-
+                return_val = add(exchange, random_id(), "BOND", "SELL", price, size)
+        print("\n\nOUTPUT: "+return_val+"\n\n")
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
