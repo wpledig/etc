@@ -10,6 +10,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import random
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
@@ -26,6 +27,7 @@ test_mode = True
 # 1 is slower
 # 2 is empty
 
+positions = 0
 test_exchange_index = 2
 prod_exchange_hostname = "production"
 
@@ -60,6 +62,30 @@ def convert(exchange, id, symbol, dir, size):
 def cancel(exchange, id):
     write_to_exchange(exchange, {"type": "cancel", "order_id": id})
     return read_from_exchange(exchange)
+
+# ~~~~~============== TRADING  ==============~~~~~
+
+def random_id():
+    return random.randint(0, 2**32)
+
+def trade_bonds(exchange):
+    while True:
+        order = read_from_exchange(exchange)
+        if(line['type'] == "book" and line['symbol'] == "BOND"):
+            buy = line['buy']
+            sell = line['sell']
+            buy_best = buy[0]
+            sell_best = sell[0]
+            if(buy_best[0] < 1000):
+                price = buy_best[0][0]
+                size = buy_best[0][1]
+                add(exchange, random_id(), "BOND", "BUY", price, size)
+
+            if(sell_best[0] < 1000):
+                price = sell_best[0][0]
+                #size = min(positions, sell_best[0][1])
+                size = sell_best[0][1]
+                add(exchange, random_id(), "BOND", "SELL", price, size)
 
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
