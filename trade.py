@@ -102,7 +102,7 @@ def main():
     exchange = connect()
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
-
+    book = {}
     while True:
         line = read_from_exchange(exchange)
         if(line['type'] == "fill"):
@@ -114,7 +114,10 @@ def main():
             sell = line['sell']
             if(symbol == "BOND"):
                 trade_bonds(exchange, buy, sell)
-        print(log.book_dict)
+        book = log.book_dict
+        if(log.book_dict != book):
+            book = log.book_dict
+            print(book)
 
    
 # A common mistake people make is to call write_to_exchange() > 1
