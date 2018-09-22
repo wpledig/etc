@@ -36,16 +36,18 @@ def trade_ETF(exchange, buy, sell, log, add, convert):
     if(len(sell) > 0 and sell[0][0] + 10 > fairprice/10):
         price = sell[0][0]
         size = min(sell[0][1], log.max_buy("XLK"))
-
         add(exchange, random.randint(0, 2**32), "XLK", "BUY", price, size)
-        convert_size = max(10, (log.book_dict["XLK"]/10)*10)
-        convert(exchange, random.randint(0, 2**32), "XLK", "SELL", convert_size)
-
+        
         #add(exchange, random.randint(0, 2**32), "BOND", "SELL", int(log.price_dict['BOND']), min(3 * convert_size/10, log.max_sell("BOND")))
-        add(exchange, random.randint(0, 2**32), "AAPL", "SELL", int(log.price_dict['AAPL']), log.book_dict['AAPL'])
-        add(exchange, random.randint(0, 2**32), "MSFT", "SELL", int(log.price_dict['MSFT']), log.book_dict['MSFT'])
-        add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(log.price_dict['GOOG']), log.book_dict['GOOG'])
+        
+def convert(exchange, log):
+    convert_size = max(10, (log.book_dict["XLK"]/10)*10)
+    convert(exchange, random.randint(0, 2**32), "XLK", "SELL", convert_size)
 
+def flush(exchange, log):
+    add(exchange, random.randint(0, 2**32), "AAPL", "SELL", int(log.price_dict['AAPL']), log.book_dict['AAPL'])
+    add(exchange, random.randint(0, 2**32), "MSFT", "SELL", int(log.price_dict['MSFT']), log.book_dict['MSFT'])
+    add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(log.price_dict['GOOG']), log.book_dict['GOOG'])
 
 
 
