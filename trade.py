@@ -67,7 +67,7 @@ def cancel(exchange, id):
 
 
 def update_current_price(log, symbol, buy, sell):
-    if(symbol == "BOND"):
+    if(symbol == "bond"):
         return 0
     price = 0
     if(len(buy) == 0 and len(sell) == 0):
@@ -103,8 +103,7 @@ def main():
             symbol = line['symbol']
             buy = line['buy']
             sell = line['sell']
-            if(symbol != "BOND"):
-                price = update_current_price(log, symbol, buy, sell)
+            price = update_current_price(log, symbol, buy, sell)
                 #if(price != 0):
                     #price_collection.add_price(symbol, price, add, exchange, buy, sell)
             if(symbol == "BOND"):
