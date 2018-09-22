@@ -55,19 +55,15 @@ def read_from_exchange(exchange):
 
 def hello(exchange, name):
     write_to_exchange(exchange, {"type": "hello", "team": name.upper()})
-    return read_from_exchange(exchange)
 
 def add(exchange, id, symbol, dir, price, size):
     write_to_exchange(exchange, {"type": "add", "order_id": id, "symbol": symbol, "dir": dir, "price": price, "size": size})
-    return read_from_exchange(exchange)
 
 def convert(exchange, id, symbol, dir, size):
     write_to_exchange(exchange, {"type": "convert", "order_id": id, "symbol": symbol, "dir": dir, "size": size})
-    return read_from_exchange(exchange)
 
 def cancel(exchange, id):
     write_to_exchange(exchange, {"type": "cancel", "order_id": id})
-    return read_from_exchange(exchange)
 
 
 def update_current_price(log, symbol, buy, sell):
@@ -98,6 +94,8 @@ def main():
         line = read_from_exchange(exchange)
         if(line['type'] == "fill"):
             log.fill(line['symbol'], line['dir'], line['price'], line['size'])
+            print(line)
+        if(line['type'] == "reject"):
             print(line)
         if(line['type'] == "book"):
             symbol = line['symbol']
