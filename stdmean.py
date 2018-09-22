@@ -1,23 +1,26 @@
-import numpy as np
 import random
 
 class PriceCollection:
     def __init__(self):
         self.array_dict = {
-            "AAPL": np.array([]),
-            "BABA": np.array([]),
-            "BABZ": np.array([]),
-            "BOND": np.array([]),
-            "GOOG": np.array([]),
-            "MSFT": np.array([]),
-            "XLK": np.array([])
+            "AAPL": [],
+            "BABA": [],
+            "BABZ": [],
+            "BOND": [],
+            "GOOG": [],
+            "MSFT": [],
+            "XLK": [],
         }
-
     def getSTD(self, symbol):
-        return np.std(self.array_dict[symbol])
+        lst = self.array_dict[symbol]
+        sum = 0
+        mn = mean(lst)
+        for i in range(len(lst)):
+            sum += pow((lst[i]-mn),2)
+        return sqrt(sum/len(lst)-1)
 
     def getMean(self, symbol):
-        return np.mean(self.array_dict[symbol])
+        return sum(self.array_dict[symbol])/float(len(self.array_dict[symbol]))
 
     def add_price(self, symbol, price, add, exchange, buy, sell):
         self.array_dict[symbol].append([price])
