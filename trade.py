@@ -14,6 +14,7 @@ import random
 import time
 import tracking
 import bonds
+import etf
 
 
 log = tracking.TrackingBook()
@@ -102,6 +103,8 @@ def main():
             update_current_price(log, symbol, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
+            if(symbol == "XLK"):
+                etf.trade_ETF(exchange, buy, sell, log, add, convert)
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
             print(log.book_dict)
