@@ -90,12 +90,18 @@ def main():
 
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
-        prob = random.random()
-        if(prob < 0.1):
-            ad = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", int(log.price_dict["GOOG"]), 2)
-        if(prob < 0.1):
-            b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(log.price_dict["GOOG"]), 2)
-        print("PRICE: "+str(log.price_dict["GOOG"]))
+
+        
+        if(x['type'] == "book" and x['symbol'] == "GOOG"):
+            fair_val_goog = log.price_dict["GOOG"]
+            buy = x['buy']
+            sell = x['sell']
+            if(len(sell) != 0 and sell[0][0] < fair_val_goog):
+                add(exchange, random.randint(0, 2**32), "GOOG", "BUY", sell[0][0], sell[0][1])
+            if(len(buy) != 0 and buy[0][0] > fair_val_goog):
+                add(exchange, random.randint(0, 2**32), "GOOG", "SELL", buy[0][0], buy[0][1])
+
+        #print("PRICE: "+str(log.price_dict["GOOG"]))
         
 
 
