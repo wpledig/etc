@@ -105,16 +105,16 @@ def main():
             sell = line['sell']
             if(symbol != "BOND"):
                 price = update_current_price(log, symbol, buy, sell)
-                if(price != 0):
-                    price_collection.add_price(symbol, price, add, exchange, buy, sell)
+                #if(price != 0):
+                    #price_collection.add_price(symbol, price, add, exchange, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds2(exchange, log, buy, sell, add)
 
             #if(symbol == "XLK"):
                 #etf.trade_ETF(exchange, buy, sell, log, add, convert)
 
-            #if(symbol == "BABA"):
-                #arbitrage.arbitrage_adr(exchange, log, buy, sell, add)
+            if(symbol == "BABA"):
+                arbitrage.arbitrage_adr(exchange, log, buy, sell, add)
 
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
