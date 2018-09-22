@@ -4,7 +4,7 @@ import random
 def arbitrage_adr(exchange, log, buy, sell, add, convert):
     if(len(sell) == 0):
         return
-    fairval = log.price_dict["BABZ"]
+    fairval = int(log.price_dict["BABZ"])
     adr_val = sell[0][0]
     if(fairval > adr_val + 10):
         price = sell[0][0]
@@ -13,5 +13,4 @@ def arbitrage_adr(exchange, log, buy, sell, add, convert):
         add(exchange, random.randint(0, 2**32), "BABA", "BUY", price, size)
         convert(exchange, random.randint(0, 2**32), "BABA", "SELL", size)
         r = random.randint(0, 2**32)
-        print(r, fairval)
-        add(exchange, r, "BABZ", "SELL", int(fairval), size)
+        add(exchange, r, "BABZ", "SELL", fairval, size)
