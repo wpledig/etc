@@ -90,10 +90,10 @@ def main():
     while True:
         x = read_from_exchange(exchange)
         print(x)
-        a = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", 5000, 2)
+        a = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", 5600, 2)
         print(a)
         time.sleep(5)
-        b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", 4000, 2)
+        b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", 5500, 2)
         print(b)
         
 
