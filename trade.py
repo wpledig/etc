@@ -15,8 +15,9 @@ import time
 import tracking
 import bonds
 import etf
+import stdmean
 
-
+price_collection = stdmean.PriceCollection()
 log = tracking.TrackingBook()
 team_name = "Chasers"
 
@@ -78,6 +79,7 @@ def update_current_price(log, symbol, buy, sell):
         price = buy[0][0]
     else:
         price = (buy[0][0] + sell[0][0])/2.0
+    return price
     log.update_price(symbol, price)
 
 # ~~~~~============== TRADING  ==============~~~~~
@@ -101,7 +103,9 @@ def main():
             buy = line['buy']
             sell = line['sell']
             if(symbol != "BOND"):
-                update_current_price(log, symbol, buy, sell)
+                price = update_current_price(log, symbol, buy, sell)
+                if(price != 0):
+                    price_collection.add_price(symbol, price, add, exchange, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
             #if(symbol == "XLK"):
