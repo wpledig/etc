@@ -79,8 +79,8 @@ def update_current_price(log, symbol, buy, sell):
         price = buy[0][0]
     else:
         price = (buy[0][0] + sell[0][0])/2.0
-    return price
     log.update_price(symbol, price)
+    return price
 
 # ~~~~~============== TRADING  ==============~~~~~
 
