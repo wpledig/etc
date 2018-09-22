@@ -1,20 +1,17 @@
 import time
-<<<<<<< HEAD
-
-=======
->>>>>>> a21a55e6cf142c5ab3f85d3dd34d870f8c504fdd
 import random
 
 
 def trade_ETF(exchange, buy, sell, log, add, convert):
     fairprice = 3 * log.price_dict['BOND']  + 2 * log.price_dict['AAPL'] + 3 * log.price_dict['MSFT'] + 2 * log.price_dict['GOOG']
+    
     if(len(sell) > 0 and sell[0][0] + 100 < fairprice):
         sell_best = sell[0]
         price = sell_best[0]
         size = min(sell_best[1], log.max_buy("XLK"))
 
         add(exchange, random.randint(0, 2**32), "XLK", "BUY", price, size)
-        time.sleep(0.1)
+        time.sleep(1)
         convert(exchange, random.randint(0, 2**32), "XLK", "SELL", size)
         time.sleep(0.1)
         add(exchange, random.randint(0, 2**32), "BOND", "SELL", log.price_dict['BOND'], min(3 * size, log.max_sell("BOND")))
