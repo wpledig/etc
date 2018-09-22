@@ -84,21 +84,17 @@ def random_id():
     return random.randint(0, 2**32)
 
 def trade_bonds(exchange, buy, sell):
-    #time.sleep(0.1)
-    return_val = " NONE "
     if(len(buy) > 0 and buy[0][0] < 1000):
         buy_best = buy[0]
         price = buy_best[0]
         size = min(buy_best[1], log.max_buy("BOND"))
         return_val = add(exchange, random_id(), "BOND", "BUY", price, size)
-        print("\n\nOUTPUT: "+str(return_val)+"\n\n")
 
     if(len(sell) > 0 and sell[0][0] > 1000):
         sell_best = sell[0]
         price = sell_best[0]
         size = min(sell_best[1] if short else min(0, sell_best[0][1]), log.max_sell("BOND"))
         return_val = add(exchange, random_id(), "BOND", "SELL", price, size)
-        print("\n\nOUTPUT: "+str(return_val)+"\n\n")
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
@@ -110,13 +106,15 @@ def main():
     while True:
         line = read_from_exchange(exchange)
         if(line['type'] == "fill"):
-            log.log(line['symbol'], line['dir'], line['price'], line['size'])
+            log.fill(line['symbol'], line['dir'], line['price'], line['size'])
+            print(line)
         if(line['type'] == "book"):
             symbol = line['symbol']
             buy = line['buy']
             sell = line['sell']
             if(symbol == "BOND"):
                 trade_bonds(exchange, buy, sell)
+        print(log.book_dict)
 
    
 # A common mistake people make is to call write_to_exchange() > 1
