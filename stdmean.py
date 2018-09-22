@@ -32,6 +32,7 @@ class PriceCollection:
             if price < self.getMean(symbol) - self.getSTD(symbol) and len(sell) > 0:
                 add(exchange, random.randint(0, 2**32), symbol, "BUY", sell[0][0], sell[0][1])
             if price > self.getMean(symbol) + self.getSTD(symbol) and len(buy) > 0:
+                print("-------------\n\n")
                 add(exchange, random.randint(0, 2**32), symbol, "SELL", buy[0][0], buy[0][1])
 
         """
