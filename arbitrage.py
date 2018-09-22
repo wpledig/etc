@@ -14,4 +14,4 @@ def arbitrage_adr(exchange, log, buy, sell, add, convert):
         convert(exchange, random.randint(0, 2**32), "BABA", "SELL", size)
         r = random.randint(0, 2**32)
         print(r, fairval)
-        add(exchange, r, "BABZ", "SELL", fairval, size)
+        add(exchange, r, "BABZ", "SELL", int(fairval), size)
