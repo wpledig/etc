@@ -1,5 +1,7 @@
 import random
 
+short = 1
+
 def trade_bonds(exchange, log, buy, sell, add):
     if(len(buy) > 0 and buy[0][0] < 1000):
         buy_best = buy[0]
