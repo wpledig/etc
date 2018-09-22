@@ -11,6 +11,7 @@ import sys
 import socket
 import json
 import random
+import time
 
 # ~~~~~============== CONFIGURATION  ==============~~~~~
 # replace REPLACEME with your team name!
@@ -28,7 +29,7 @@ test_mode = True
 # 2 is empty
 
 positions = 0
-test_exchange_index = 1
+test_exchange_index = 0
 prod_exchange_hostname = "production"
 
 port=25000 + (test_exchange_index if test_mode else 0)
@@ -70,6 +71,7 @@ def random_id():
 
 def trade_bonds(exchange):
     while True:
+        time.sleep(0.1)
         return_val = " NONE "
         line = read_from_exchange(exchange)
         if(line['type'] == "book" and line['symbol'] == "BOND"):
@@ -80,14 +82,15 @@ def trade_bonds(exchange):
                 price = buy_best[0]
                 size = buy_best[1]
                 return_val = add(exchange, random_id(), "BOND", "BUY", price, size)
-
+                print("\n\nOUTPUT: "+str(return_val)+"\n\n")
             if(len(sell) > 0 and sell[0][0] > 1000):
                 sell_best = sell[0]
                 price = sell_best[0]
                 #size = min(positions, sell_best[0][1])
                 size = sell_best[1]
                 return_val = add(exchange, random_id(), "BOND", "SELL", price, size)
-        print("\n\nOUTPUT: "+return_val+"\n\n")
+		print("\n\nOUTPUT: "+str(return_val)+"\n\n")
+        #print(positions)
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
