@@ -67,6 +67,8 @@ def cancel(exchange, id):
 
 
 def update_current_price(log, symbol, buy, sell):
+    if(symbol == "BOND"):
+        return 0
     price = 0
     if(len(buy) == 0 and len(sell) == 0):
         return 0
@@ -108,10 +110,10 @@ def main():
             if(symbol == "BOND"):
                 bonds.trade_bonds2(exchange, log, buy, sell, add)
 
-            if(symbol == "XLK"):
+            elif(symbol == "XLK"):
                 etf.trade_ETF(exchange, buy, sell, log, add, convert)
 
-            if(symbol == "BABA"):
+            elif(symbol == "BABA"):
                 arbitrage.arbitrage_adr(exchange, log, buy, sell, add, convert)
 
             etf.convert_etf(exchange, log, convert)

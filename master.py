@@ -15,6 +15,7 @@ import time
 import tracking
 import bonds
 import etf
+import arbitrage
 
 
 #price_collection = stdmean.PriceCollection()
@@ -108,6 +109,10 @@ def main():
                     #price_collection.add_price(symbol, price, add, exchange, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
+
+            if(symbol == "BABA"):
+                arbitrage.arbitrage_adr(exchange, log, buy, sell, add, convert)
+
             #if(symbol == "XLK"):
                 #etf.trade_ETF(exchange, buy, sell, log, add, convert)
         if(log.book_dict["PNL"] != pnl):
