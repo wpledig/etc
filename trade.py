@@ -31,7 +31,7 @@ test_mode = True
 # 2 is empty
 
 short = 1
-test_exchange_index = 0
+test_exchange_index = 1
 prod_exchange_hostname = "production"
 USDlimit = 30000
 
