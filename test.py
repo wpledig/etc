@@ -92,10 +92,10 @@ def main():
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
         prob = random.random()
         if(prob > 0.25):
-            ad = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", log.price_dict["GOOG"], 2)
+            ad = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", int(log.price_dict["GOOG"]), 2)
 
         if(prob > 0.25):
-            b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", log.price_dict["GOOG"], 2)
+            b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(log.price_dict["GOOG"]), 2)
         print("PRICE: "+str(log.price_dict["GOOG"]))
         
 
