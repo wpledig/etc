@@ -14,3 +14,14 @@ def trade_bonds(exchange, log, buy, sell, add):
         price = sell_best[0]
         size = min(sell_best[1] if short else min(0, sell_best[0][1]), log.max_sell("BOND"))
         return_val = add(exchange, random.randint(0, 2**32), "BOND", "SELL", price, size)
+
+def trade_bonds2(exchange, log, buy, sell, add):
+    for order in buy:
+        if(order[0] < 1000):
+            size = min(order[1], log.max_buy("BOND"))
+            return_val = add(exchange, random.randint(0, 2**32), "BOND", "BUY", order[0], size)
+
+    for order in sell:
+        if(order[0] > 1000):
+            size = min(order[1], log.max_sell("BOND"))
+            return_val = add(exchange, random.randint(0, 2**32), "BOND", "SELL", order[0], size)

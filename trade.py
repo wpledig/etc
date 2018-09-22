@@ -108,7 +108,7 @@ def main():
                 if(price != 0):
                     price_collection.add_price(symbol, price, add, exchange, buy, sell)
             if(symbol == "BOND"):
-                bonds.trade_bonds(exchange, log, buy, sell, add)
+                bonds.trade_bonds2(exchange, log, buy, sell, add)
 
             #if(symbol == "XLK"):
                 #etf.trade_ETF(exchange, buy, sell, log, add, convert)
