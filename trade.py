@@ -114,7 +114,7 @@ def main():
             if(symbol == "BABA"):
                 arbitrage.arbitrage_adr(exchange, log, buy, sell, add, convert)
                 
-            etf.convert(exchange, log)
+            etf.convert_etf(exchange, log)
             etf.flush(exchange, log)
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
