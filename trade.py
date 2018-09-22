@@ -109,6 +109,8 @@ def main():
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
             print(log.book_dict)
+        if(line['type'] == 'ack' or line['type'] == 'reject'):
+            print(line)
 
    
 # A common mistake people make is to call write_to_exchange() > 1
