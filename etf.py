@@ -1,5 +1,8 @@
 import time
+<<<<<<< HEAD
 
+=======
+>>>>>>> a21a55e6cf142c5ab3f85d3dd34d870f8c504fdd
 import random
 
 
