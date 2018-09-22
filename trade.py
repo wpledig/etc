@@ -22,7 +22,7 @@ team_name = "Chasers"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
 
-test_mode = False
+test_mode = True
 
 # This setting changes which test exchange is connected to.
 # 0 is prod-like
@@ -99,8 +99,9 @@ def main():
             symbol = line['symbol']
             buy = line['buy']
             sell = line['sell']
+            update_current_price(log, symbol, buy, sell)
             if(symbol == "BOND"):
-                bonds.trade_bonds(exchange, log, buy, sell)
+                bonds.trade_bonds(exchange, log, buy, sell, add)
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
             print(log.book_dict)
