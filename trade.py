@@ -100,7 +100,8 @@ def main():
             symbol = line['symbol']
             buy = line['buy']
             sell = line['sell']
-            update_current_price(log, symbol, buy, sell)
+            if(symbol != "BOND"):
+                update_current_price(log, symbol, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
             if(symbol == "XLK"):
