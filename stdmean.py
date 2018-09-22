@@ -27,8 +27,6 @@ class PriceCollection:
     def add_price(self, symbol, price, add, exchange, buy, sell):
         self.array_dict[symbol].append(price)
 
-        print(self.array_dict)
-
         if symbol != "BONDS" and len(self.array_dict[symbol]) > self.breakpoint:
             self.array_dict[symbol].pop(0)
             if price < self.getMean(symbol) - self.getSTD(symbol) and len(sell) > 0:
