@@ -23,7 +23,7 @@ team_name = "Chasers"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
 
-test_mode = True
+test_mode = False
 
 # This setting changes which test exchange is connected to.
 # 0 is prod-like
@@ -31,7 +31,7 @@ test_mode = True
 # 2 is empty
 
 short = 1
-test_exchange_index = 1
+test_exchange_index = 0
 prod_exchange_hostname = "production"
 USDlimit = 30000
 
@@ -104,13 +104,13 @@ def main():
                 update_current_price(log, symbol, buy, sell)
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
-            if(symbol == "XLK"):
-                etf.trade_ETF(exchange, buy, sell, log, add, convert)
+            #if(symbol == "XLK"):
+                #etf.trade_ETF(exchange, buy, sell, log, add, convert)
         if(log.book_dict["PNL"] != pnl):
             pnl = log.book_dict["PNL"]
             print(log.book_dict)
-        if(line['type'] == 'ack' or line['type'] == 'reject'):
-            print(line)
+        #if(line['type'] == 'ack' or line['type'] == 'reject'):
+            #print(line)
 
    
 # A common mistake people make is to call write_to_exchange() > 1
