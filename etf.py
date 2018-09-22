@@ -41,7 +41,7 @@ def trade_ETF(exchange, buy, sell, log, add, convert):
         convert_size = max(10, (log.book_dict["XLK"]/10)*10)
         convert(exchange, random.randint(0, 2**32), "XLK", "SELL", convert_size)
 
-        add(exchange, random.randint(0, 2**32), "BOND", "SELL", log.price_dict['BOND'], min(3 * convert_size/10, log.max_sell("BOND")))
+        #add(exchange, random.randint(0, 2**32), "BOND", "SELL", log.price_dict['BOND'], min(3 * convert_size/10, log.max_sell("BOND")))
         add(exchange, random.randint(0, 2**32), "AAPL", "SELL", log.price_dict['AAPL'], min(2 * convert_size/10, log.max_sell("AAPL")))
         add(exchange, random.randint(0, 2**32), "MSFT", "SELL", log.price_dict['MSFT'], min(3 * convert_size/10, log.max_sell("MSFT")))
         add(exchange, random.randint(0, 2**32), "GOOG", "SELL", log.price_dict['GOOG'], min(2 * convert_size/10, log.max_sell("GOOG")))
