@@ -45,6 +45,22 @@ def write_to_exchange(exchange, obj):
 def read_from_exchange(exchange):
     return json.loads(exchange.readline())
 
+def hello(exchange, name):
+    write_to_exchange(exchange, {"type": "hello", "team": name.upper()})
+    return read_from_exchange(exchange)
+
+def add(exchange, id, symbol, dir, price, size):
+    write_to_exchange(exchange, {"type": "add", "order_id": id, "symbol": symbol, "dir": dir, "price": price, "size": size})
+    return read_from_exchange(exchange)
+
+def convert(exchange, id, symbol, dir, size):
+    write_to_exchange(exchange, {"type": "convert", "order_id": id, "symbol": symbol, "dir": dir, "size": size})
+    return read_from_exchange(exchange)
+
+def cancel(exchange, id):
+    write_to_exchange(exchange, {"type": "cancel", "order_id": id})
+    return read_from_exchange(exchange)
+
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
