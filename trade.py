@@ -98,7 +98,7 @@ def main():
     exchange = connect()
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
-    trade_bonds(exchange)    
+    trade_bonds(exchange)
 # A common mistake people make is to call write_to_exchange() > 1
     # time for every read_from_exchange() response.
     # Since many write messages generate marketdata, this will cause an
