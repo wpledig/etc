@@ -15,25 +15,16 @@ class OrderBook:
 
 class TrackingBook:
     def __init__(self):
-        self.pnl = 0
-        self.aapl = 0
-        self.baba = 0
-        self.babz = 0
-        self.bond = 0
-        self.goog = 0
-        self.msft = 0
-        self.usd = 0
-        self.xlk = 0
         self.book_dict = {
-            "PNL": self.pnl,
-            "AAPL": self.aapl,
-            "BABA": self.baba,
-            "BABZ": self.babz,
-            "BOND": self.bond,
-            "GOOG": self.goog,
-            "MSFT": self.msft,
-            "USD": self.usd,
-            "XLK": self.xlk
+            "PNL": 0,
+            "AAPL": 0,
+            "BABA": 0,
+            "BABZ": 0,
+            "BOND": 0,
+            "GOOG": 0,
+            "MSFT": 0,
+            "USD": 0,
+            "XLK": 0
         }
         self.price_dict = {
             "AAPL": 0,
@@ -45,15 +36,38 @@ class TrackingBook:
             "XLK": 0,
         }
 
+        self.max_dict = {
+            "AAPL": 100,
+            "BABA": 10,
+            "BABZ": 10,
+            "BOND": 100,
+            "GOOG": 100,
+            "MSFT": 100,
+            "XLK": 100,
+        }
+
     def compute_pnl(self):
-        self.pnl = self.usd + sum(map(lambda key: self.book_dict[key] * self.price_dict[key], self.price_dict.keys()))
+        self.book_dict["PNL"] = self.book_dict["USD"] + sum(map(lambda key: self.book_dict[key] * self.price_dict[key], self.price_dict.keys()))
 
     def fill(self, symbol, direction, price, size):
         dir = 1
         if direction == "SELL":
             dir = -1
         self.book_dict[symbol] += dir * size
-        self.usd -= dir * price
+        self.book_dict["USD"] -= dir * price * size
+        self.compute_pnl()
 
     def update_price(self, symbol, price):
         self.price_dict[symbol] = price
+        self.compute_pnl()
+
+    def max_buy(self, symbol):
+        return self.max_dict[symbol] - self.book_dict[symbol] - 1
+
+    def max_sell(self, symbol):
+        return self.max_dict[symbol] + self.book_dict[symbol] - 1
+
+book = TrackingBook()
+book.fill("GOOG", "BUY", 100, 100)
+book.update_price("GOOG", 100)
+print(book.book_dict)
