@@ -3,7 +3,7 @@ import math
 
 class PriceCollection:
     def __init__(self):
-        self.breakpoint = 30
+        self.breakpoint = 50
         self.array_dict = {
             "AAPL": [],
             "BABA": [],
@@ -26,6 +26,17 @@ class PriceCollection:
 
     def add_price(self, symbol, price, add, exchange, buy, sell):
         self.array_dict[symbol].append(price)
+
+        print(self.array_dict)
+
+        if symbol != "BONDS" and len(self.array_dict[symbol]) > self.breakpoint:
+            self.array_dict[symbol].pop(0)
+            if price < self.getMean(symbol) - self.getSTD(symbol) and len(sell) > 0:
+                add(exchange, random.randint(0, 2**32), symbol, "BUY", sell[0][0], sell[0][1])
+            if price > self.getMean(symbol) + self.getSTD(symbol) and len(buy) > 0:
+                add(exchange, random.randint(0, 2**32), symbol, "SELL", buy[0][0], buy[0][1])
+
+        """
         if symbol == "BABZ" and len(self.array_dict["BABZ"]) > self.breakpoint:
             self.array_dict[symbol].pop(0)
             if price < self.getMean("BABZ") - self.getSTD("BABZ") and len(sell) > 0:
@@ -34,4 +45,4 @@ class PriceCollection:
                 ra = random.randint(0, 2**32)
                 print(ra)
                 add(exchange, ra, "BABA", "SELL", buy[0][0], buy[0][1])
-
+        """
