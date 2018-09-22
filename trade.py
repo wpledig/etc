@@ -98,7 +98,7 @@ def main():
         line = read_from_exchange(exchange)
         if(line['type'] == "fill"):
             log.fill(line['symbol'], line['dir'], line['price'], line['size'])
-            #print(line)
+            print(line)
         if(line['type'] == "book"):
             symbol = line['symbol']
             buy = line['buy']

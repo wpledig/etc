@@ -31,4 +31,7 @@ class PriceCollection:
             if price < self.getMean("BABZ") - self.getSTD("BABZ") and len(sell) > 0:
                 add(exchange, random.randint(0, 2**32), "BABA", "BUY", sell[0][0], sell[0][1])
             if price > self.getMean("BABZ") + self.getSTD("BABZ") and len(buy) > 0:
-                add(exchange, random.randint(0, 2**32), "BABA", "SELL", buy[0][0], buy[0][1])
+                ra = random.randint(0, 2**32)
+                print(ra)
+                add(exchange, ra, "BABA", "SELL", buy[0][0], buy[0][1])
+
