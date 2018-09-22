@@ -88,9 +88,11 @@ def main():
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
     while True:
-        add(exchange, random.randint(0, 2**32), "GOOG", "BUY", 5000, 2)
+        a = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", 5000, 2)
+        print(a)
         time.sleep(5)
-        add(exchange, random.randint(0, 2**32), "GOOG", "SELL", 4000, 2)
+        b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", 4000, 2)
+        print(b)
         
 
 
