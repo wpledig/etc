@@ -88,12 +88,12 @@ def main():
         x = read_from_exchange(exchange)
         print(x)
 
-        if(x['type'] == "BOOK"):
+        if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
         
         #a = add(exchange, random.randint(0, 2**32), "GOOG", "BUY", 5600, 2)
         #b = add(exchange, random.randint(0, 2**32), "GOOG", "SELL", 5500, 2)
-        print(log.price_dict["GOOG"])
+        print("PRICE: "+str(log.price_dict["GOOG"]))
         
 
 
