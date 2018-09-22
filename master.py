@@ -110,8 +110,8 @@ def main():
             if(symbol == "BOND"):
                 bonds.trade_bonds(exchange, log, buy, sell, add)
 
-            if(symbol == "BABA"):
-                arbitrage.arbitrage_adr(exchange, log, buy, sell, add, convert)
+            #if(symbol == "BABA"):
+                #arbitrage.arbitrage_adr(exchange, log, buy, sell, add, convert)
 
             #if(symbol == "XLK"):
                 #etf.trade_ETF(exchange, buy, sell, log, add, convert)
