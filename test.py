@@ -93,7 +93,7 @@ def main():
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
 
         if(x['type'] == "book" and x['symbol'] == "BOND"):
-                bonds.trade_bonds2(exchange, log, buy, sell, add)
+                bonds.trade_bonds2(exchange, log, x['buy'], x['sell'], add)
 
         if(x['type'] == "book" and x['symbol'] == "GOOG" and 1==0):
             fair_val_goog = log.price_dict["GOOG"]
