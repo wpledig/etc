@@ -104,7 +104,7 @@ def main():
 
         for i in ["GOOG", "MSFT", "BOND", "AAPL", "XLK", "BABA", "BABZ"]:
             r = random.random()
-            noise = -5*random.random()
+            noise = -3*random.random()
             d = "BUY"
             if(r > 0.5):
                 noise*=-1
