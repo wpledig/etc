@@ -105,6 +105,25 @@ def main():
                 else:
                     add(exchange, random.randint(0, 2**32), "GOOG", "BUY", buy[0][0], buy[0][1])
 
+        elif(x['type'] == "book" and x['symbol'] == "AAPL"):
+            fair_val_goog = log.price_dict["AAPL"]
+            buy = x['buy']
+            sell = x['sell']
+            if(len(sell) != 0 and len(buy) != 0 ):
+                if(fair_val_goog - buy[0][0] > sell[0][0] - fair_val_goog):
+                    add(exchange, random.randint(0, 2**32), "AAPL", "SELL", sell[0][0], sell[0][1])
+                else:
+                    add(exchange, random.randint(0, 2**32), "AAPL", "BUY", buy[0][0], buy[0][1])
+
+        elif(x['type'] == "book" and x['symbol'] == "MSFT"):
+            fair_val_goog = log.price_dict["MSFT"]
+            buy = x['buy']
+            sell = x['sell']
+            if(len(sell) != 0 and len(buy) != 0 ):
+                if(fair_val_goog - buy[0][0] > sell[0][0] - fair_val_goog):
+                    add(exchange, random.randint(0, 2**32), "MSFT", "SELL", sell[0][0], sell[0][1])
+                else:
+                    add(exchange, random.randint(0, 2**32), "MSFT", "BUY", buy[0][0], buy[0][1])
         #print("PRICE: "+str(log.price_dict["GOOG"]))
         
 
