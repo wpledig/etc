@@ -125,7 +125,7 @@ def main():
                     add(exchange, random.randint(0, 2**32), "MSFT", "SELL", sell[0][0], sell[0][1])
                 else:
                     add(exchange, random.randint(0, 2**32), "MSFT", "BUY", buy[0][0], buy[0][1])"""
-        #print("PRICE: "+str(log.price_dict["GOOG"]))
+        print("BOOK: "+str(log.book_dict))
         
 
 
