@@ -102,6 +102,7 @@ def main():
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
 
+
         for i in ["GOOG", "MSFT", "BOND", "AAPL", "XLK", "BABA", "BABZ"]:
             r = random.random()
             noise = 0*random.random()
@@ -109,7 +110,9 @@ def main():
             if(r > 0.5):
                 noise*=-1
                 d = "SELL"
+            time.sleep(1)
             add(exchange, random.randint(0, 2**32), i, d, int(log.price_dict[i]) + noise, 1)
+
 
         print(log.book_dict)
         print(log.price_dict)
