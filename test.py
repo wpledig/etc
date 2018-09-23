@@ -80,6 +80,13 @@ def update_current_price(log, symbol, buy, sell):
 
 # ~~~~~============== MAIN LOOP ==============~~~~~
 
+def flush(exchange, log):
+    size = log.book_dict["GOOG"]
+    fairval = log.price_dict["GOOG"]
+    add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(fairval), size)
+
+
+count = 1
 
 def main():
     exchange = connect()
@@ -87,7 +94,9 @@ def main():
     hello_from_exchange = read_from_exchange(exchange)
     while True:
         x = read_from_exchange(exchange)
-        print(x)
+        #print(x)
+        if(x['type'] == "fill"):
+            log.fill(x['symbol'], x['dir'], x['price'], x['size'])
 
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
@@ -95,7 +104,6 @@ def main():
         #if(x['type'] == "book" and x['symbol'] == "BOND"):
                 #bonds.trade_bonds2(exchange, log, x['buy'], x['sell'], add)
 
-        buy_rate = 0.5
         if(x['type'] == "book" and x['symbol'] == "GOOG"):
             fair_val_goog = log.price_dict["GOOG"]
             buy = x['buy']
@@ -105,6 +113,12 @@ def main():
                     add(exchange, random.randint(0, 2**32), "GOOG", "SELL", sell[0][0], sell[0][1])
                 else:
                     add(exchange, random.randint(0, 2**32), "GOOG", "BUY", buy[0][0], buy[0][1])
+
+        if(log.book_dict["PNL"] > count*1000):
+            flush(exchange, log)
+            count+=1
+
+
         """
         elif(x['type'] == "book" and x['symbol'] == "AAPL"):
             fair_val_goog = log.price_dict["AAPL"]
@@ -125,7 +139,7 @@ def main():
                     add(exchange, random.randint(0, 2**32), "MSFT", "SELL", sell[0][0], sell[0][1])
                 else:
                     add(exchange, random.randint(0, 2**32), "MSFT", "BUY", buy[0][0], buy[0][1])"""
-        print("BOOK: "+str(log.book_dict))
+        #print("BOOK: "+str(log.book_dict))
         
 
 
