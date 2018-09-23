@@ -96,10 +96,11 @@ def main():
             fair_val_goog = log.price_dict["GOOG"]
             buy = x['buy']
             sell = x['sell']
-            if(len(sell) != 0 and sell[0][0] < fair_val_goog):
-                add(exchange, random.randint(0, 2**32), "GOOG", "BUY", sell[0][0], sell[0][1])
-            if(len(buy) != 0 and buy[0][0] > fair_val_goog):
-                add(exchange, random.randint(0, 2**32), "GOOG", "SELL", buy[0][0], buy[0][1])
+            if(len(sell) != 0 and len(buy) != 0 ):
+                if(fair_val_goog - buy[0][0] > sell[0][0] - fair_val_goog):
+                    add(exchange, random.randint(0, 2**32), "GOOG", "BUY", buy[0][0], buy[0][1])
+                else:
+                    add(exchange, random.randint(0, 2**32), "GOOG", "SELL", sell[0][0], sell[0][1])
 
         #print("PRICE: "+str(log.price_dict["GOOG"]))
         
