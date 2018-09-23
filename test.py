@@ -99,19 +99,20 @@ def main():
         if(x['type'] == "fill"):
             log.fill(x['symbol'], x['dir'], x['price'], x['size'])
 
+
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
 
 
-        elif(x['type'] == "book" and x['symbol'] == "AAPL"):
-            fair_val_goog = log.price_dict["APPL"]
+        if(x['type'] == "book" and x['symbol'] == "GOOG"):
+            fair_val_goog = log.price_dict["GOOG"]
             buy = x['buy']
             sell = x['sell']
             if(len(sell) != 0 and len(buy) != 0 ):
                 if(fair_val_goog - buy[0][0] > sell[0][0] - fair_val_goog):
-                    add(exchange, random.randint(0, 2**32), "AAPL", "SELL", sell[0][0], sell[0][1])
+                    add(exchange, random.randint(0, 2**32), "GOOG", "SELL", sell[0][0], sell[0][1])
                 else:
-                    add(exchange, random.randint(0, 2**32), "AAPL", "BUY", buy[0][0], buy[0][1])
+                    add(exchange, random.randint(0, 2**32), "GOOG", "BUY", buy[0][0], buy[0][1])
 
 
         print(log.book_dict)
