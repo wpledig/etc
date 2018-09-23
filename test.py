@@ -91,7 +91,9 @@ def main():
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
 
-        
+        if(x['type'] == "book" and symbol == "BOND"):
+                bonds.trade_bonds2(exchange, log, buy, sell, add)
+
         if(x['type'] == "book" and x['symbol'] == "GOOG"):
             fair_val_goog = log.price_dict["GOOG"]
             buy = x['buy']
