@@ -21,7 +21,7 @@ team_name = "Chasers"
 # This variable dictates whether or not the bot is connecting to the prod
 # or test exchange. Be careful with this switch!
 
-test_mode = True
+test_mode = False
 
 # This setting changes which test exchange is connected to.
 # 0 is prod-like
@@ -112,6 +112,7 @@ def main():
             add(exchange, random.randint(0, 2**32), i, d, int(log.price_dict[i]) + noise, 1)
 
         print(log.book_dict)
+        print(log.price_dict)
 
         """
         elif(x['type'] == "book" and x['symbol'] == "AAPL"):
