@@ -119,6 +119,7 @@ def main():
             flush(exchange, log)
             count+=1
 
+        print(log.book_dict)
 
         """
         elif(x['type'] == "book" and x['symbol'] == "AAPL"):
