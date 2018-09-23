@@ -102,22 +102,14 @@ def main():
         if(x['type'] == "book"):
             price = update_current_price(log, x['symbol'], x['buy'], x['sell'])
 
-        #if(x['type'] == "book" and x['symbol'] == "BOND"):
-                #bonds.trade_bonds2(exchange, log, x['buy'], x['sell'], add)
-
-        if(x['type'] == "book" and x['symbol'] == "GOOG"):
-            fair_val_goog = log.price_dict["GOOG"]
-            buy = x['buy']
-            sell = x['sell']
-            if(len(sell) != 0 and len(buy) != 0 ):
-                if(fair_val_goog - buy[0][0] > sell[0][0] - fair_val_goog):
-                    add(exchange, random.randint(0, 2**32), "GOOG", "SELL", sell[0][0], sell[0][1])
-                else:
-                    add(exchange, random.randint(0, 2**32), "GOOG", "BUY", buy[0][0], buy[0][1])
-
-        if(log.book_dict["PNL"] > count*1000):
-            flush(exchange, log)
-            count+=1
+        for i in ["GOOG", "MSFT", "BOND", "AAPL", "XLK", "BABA", "BABZ"]:
+            r = random.random()
+            noise = -5*random.random()
+            d = "BUY"
+            if(r > 0.5):
+                noise*=-1
+                d = "SELL"
+            add(exchange, random.randint(0, 2**32), i, d, int(log.price_dict[i]) + noise, 1)
 
         print(log.book_dict)
 
