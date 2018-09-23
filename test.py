@@ -86,12 +86,13 @@ def flush(exchange, log):
     add(exchange, random.randint(0, 2**32), "GOOG", "SELL", int(fairval), size)
 
 
-count = 1
+
 
 def main():
     exchange = connect()
     write_to_exchange(exchange, {"type": "hello", "team": team_name.upper()})
     hello_from_exchange = read_from_exchange(exchange)
+    count = 1
     while True:
         x = read_from_exchange(exchange)
         #print(x)
